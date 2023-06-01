@@ -1,0 +1,10 @@
+{
+    "user_id":"required",
+    "product_id":"required",
+    "quantity":"",
+    "setting":{
+        "quantity": "quantity",
+        "user_id": "user_id",
+        "product_id": "product_id"
+    }
+}

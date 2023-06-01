@@ -1,0 +1,27 @@
+{
+    "id":"int",
+    "user_id":"string",
+    "product_id":"string",
+    "quantity":"int",
+    "filterable":{
+        "user_id":"int"
+    },
+    "belongs_to":{
+        "user":{
+            "table":"users",
+            "fk":"user_id",
+            "columns":["name"]
+        },
+        "product":{
+            "table":"products",
+            "fk":"product_id",
+            "columns":["name", "image_1_url", "price"]
+        }
+    },
+    "operation": {
+        "total": "products.price * carts.quantity"
+    },
+    "summary": {
+        "total": "operation_total"
+    }
+}
