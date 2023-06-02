@@ -1,5 +1,5 @@
-.DS_Store
 app.env
-tmp/*
-tmp
+.DS_Store
 main
+*.log
+/tmp

@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/62teknologi/62stingray/62golib/utils"
+	"github.com/62teknologi/62stingray/config"
 	"gorm.io/gorm"
 
 	"github.com/gin-gonic/gin"
@@ -32,7 +33,7 @@ func (ctrl *CartController) FindAll(ctx *gin.Context) {
 
 	values := []map[string]any{}
 	columns := []string{ctrl.Table + ".*"}
-	transformer, _ := utils.JsonFileParser("setting/transformers/response/" + ctrl.Table + "/find.json")
+	transformer, _ := utils.JsonFileParser(config.Data.SettingPath + "/transformers/response/" + ctrl.Table + "/find.json")
 	query := utils.DB.Table(ctrl.Table)
 	filter := utils.SetFilterByQuery(query, transformer, ctx)
 	search := utils.SetGlobalSearch(query, transformer, ctx)
@@ -60,7 +61,7 @@ func (ctrl *CartController) FindAll(ctx *gin.Context) {
 func (ctrl *CartController) Add(ctx *gin.Context) {
 	ctrl.Init(ctx)
 
-	transformer, _ := utils.JsonFileParser("setting/transformers/request/" + ctrl.Table + "/add.json")
+	transformer, _ := utils.JsonFileParser(config.Data.SettingPath + "/transformers/request/" + ctrl.Table + "/add.json")
 	input := utils.ParseForm(ctx)
 
 	if validation, err := utils.Validate(input, transformer); err {
@@ -102,7 +103,7 @@ func (ctrl *CartController) Add(ctx *gin.Context) {
 func (ctrl *CartController) Synch(ctx *gin.Context) {
 	ctrl.Init(ctx)
 
-	transformer, _ := utils.JsonFileParser("setting/transformers/request/" + ctrl.Table + "/synch.json")
+	transformer, _ := utils.JsonFileParser(config.Data.SettingPath + "/transformers/request/" + ctrl.Table + "/synch.json")
 	input := utils.ParseForm(ctx)
 
 	if validation, err := utils.Validate(input, transformer); err {
@@ -142,7 +143,7 @@ func (ctrl *CartController) Synch(ctx *gin.Context) {
 func (ctrl *CartController) Delete(ctx *gin.Context) {
 	ctrl.Init(ctx)
 
-	transformer, _ := utils.JsonFileParser("setting/transformers/request/" + ctrl.Table + "/delete.json")
+	transformer, _ := utils.JsonFileParser(config.Data.SettingPath + "/transformers/request/" + ctrl.Table + "/delete.json")
 
 	setting := transformer["setting"].(map[string]any)
 	userField := setting["user_id"].(string)
