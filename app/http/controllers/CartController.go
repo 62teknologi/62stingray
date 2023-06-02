@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/62teknologi/62stingray/62golib/utils"
 	"gorm.io/gorm"
@@ -122,17 +122,20 @@ func (ctrl *CartController) Synch(ctx *gin.Context) {
 	ids := (transformer["ids"]).([]any)
 	quantities := transformer["quantities"].([]any)
 
-	query := "UPDATE carts SET quantity = CASE "
+	query := "UPDATE " + ctrl.Table + " SET " + quantityField + " = CASE "
+	queryParams := []string{}
 
 	for i, id := range ids {
 		query += " WHEN id = " + strconv.Itoa(utils.ConvertToInt(id)) + " THEN " + strconv.Itoa(utils.ConvertToInt(quantities[i]))
+		queryParams = append(queryParams, "id[]="+strconv.Itoa(utils.ConvertToInt(id)))
 	}
 
 	query += " ELSE `" + quantityField + "` END WHERE id IN (?) and `" + userField + "` = ?;"
 
 	utils.DB.Exec(query, ids, transformer[userField])
 
-	ctx.JSON(http.StatusOK, utils.ResponseData("success", "update "+ctrl.SingularLabel+" success", transformer))
+	ctx.Redirect(http.StatusFound, "/api/v1/carts?"+strings.Join(queryParams, "&"))
+	//ctx.JSON(http.StatusOK, utils.ResponseData("success", "update "+ctrl.SingularLabel+" success", transformer))
 }
 
 // todo : need to check constraint error
@@ -140,24 +143,13 @@ func (ctrl *CartController) Delete(ctx *gin.Context) {
 	ctrl.Init(ctx)
 
 	transformer, _ := utils.JsonFileParser("setting/transformers/request/" + ctrl.Table + "/delete.json")
-	input := utils.ParseForm(ctx)
-
-	if validation, err := utils.Validate(input, transformer); err {
-		ctx.JSON(http.StatusOK, utils.ResponseData("failed", "validation", validation.Errors))
-		return
-	}
-
-	utils.MapValuesShifter(transformer, input)
-	utils.MapNullValuesRemover(transformer)
-
-	fmt.Println(transformer)
 
 	setting := transformer["setting"].(map[string]any)
 	userField := setting["user_id"].(string)
 
 	delete(transformer, "setting")
 
-	if err := utils.DB.Table(ctrl.Table).Where("id = ?", transformer["id"]).Where(userField+" = ?", transformer[userField]).Delete(map[string]any{}).Error; err != nil {
+	if err := utils.DB.Table(ctrl.Table).Where("id = ?", ctx.Param("id")).Where(userField+" = ?", ctx.Param("userId")).Delete(map[string]any{}).Error; err != nil {
 		ctx.JSON(http.StatusBadRequest, utils.ResponseData("error", err.Error(), nil))
 		return
 	}

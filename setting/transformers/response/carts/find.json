@@ -4,7 +4,8 @@
     "product_id":"string",
     "quantity":"int",
     "filterable":{
-        "user_id":"int"
+        "user_id":"int",
+        "id":"int"
     },
     "belongs_to":{
         "user":{

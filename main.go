@@ -34,7 +34,7 @@ func main() {
 		apiV1.GET("/:table", c.FindAll)
 		apiV1.POST("/:table", c.Add)
 		apiV1.PUT("/:table", c.Synch)
-		apiV1.DELETE("/:table", c.Delete)
+		apiV1.DELETE("/:table/:userId/:id", c.Delete)
 	}
 
 	r.GET("/health", func(c *gin.Context) {
