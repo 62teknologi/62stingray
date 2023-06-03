@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "46fe786b-22e2-4ad5-a830-f8a9c838c439",
+		"name": "62stingray",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4975546"
+	},
+	"item": [
+		{
+			"name": "health",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{$randomProduct}} {{$guid}} {{$timestamp}}\",\n    \"user_id\":\"1\",\n    \"description\":\"{{$randomLoremParagraph}}\",\n    \"length\":\"{{$randomInt}}\",\n    \"width\":\"{{$randomInt}}\",\n    \"height\":\"{{$randomInt}}\",\n    \"minimum_order\":\"{{$randomInt}}\",\n    \"is_need_insurance\":\"\",\n    \"is_new\":\"\",\n    \"status_id\":\"1\",\n    \"product_category_id\":\"1\",\n    \"skus\":[{\n        \"name\":\"{{$guid}}\",\n        \"price\":\"{{$randomInt}}\",\n        \"weight\":\"{{$randomInt}}\",\n        \"stock\":\"{{$randomInt}}\",\n        \"size\":\"{{$randomInt}}\",\n        \"color\":\"{{$randomColor}}\",\n        \"custom_1\":\"{{$randomInt}}\",\n        \"status_id\":\"1\"\n    },{\n        \"name\":\"{{$guid}}\",\n        \"price\":\"{{$randomInt}}\",\n        \"weight\":\"{{$randomInt}}\",\n        \"stock\":\"{{$randomInt}}\",\n        \"size\":\"{{$randomInt}}\",\n        \"color\":\"{{$randomColor}}\",\n        \"custom_1\":\"{{$randomInt}}\",\n        \"status_id\":\"1\"\n    }],\n    \"groups\":[1,2,3,5]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/health",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all cart",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"{{$randomProduct}} {{$guid}} {{$timestamp}}\",\n    \"user_id\":\"1\",\n    \"description\":\"{{$randomLoremParagraph}}\",\n    \"length\":\"{{$randomInt}}\",\n    \"width\":\"{{$randomInt}}\",\n    \"height\":\"{{$randomInt}}\",\n    \"minimum_order\":\"{{$randomInt}}\",\n    \"is_need_insurance\":\"\",\n    \"is_new\":\"\",\n    \"status_id\":\"1\",\n    \"product_category_id\":\"1\",\n    \"skus\":[{\n        \"name\":\"{{$guid}}\",\n        \"price\":\"{{$randomInt}}\",\n        \"weight\":\"{{$randomInt}}\",\n        \"stock\":\"{{$randomInt}}\",\n        \"size\":\"{{$randomInt}}\",\n        \"color\":\"{{$randomColor}}\",\n        \"custom_1\":\"{{$randomInt}}\",\n        \"status_id\":\"1\"\n    },{\n        \"name\":\"{{$guid}}\",\n        \"price\":\"{{$randomInt}}\",\n        \"weight\":\"{{$randomInt}}\",\n        \"stock\":\"{{$randomInt}}\",\n        \"size\":\"{{$randomInt}}\",\n        \"color\":\"{{$randomColor}}\",\n        \"custom_1\":\"{{$randomInt}}\",\n        \"status_id\":\"1\"\n    }],\n    \"groups\":[1,2,3,5]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/carts?user_id=1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"carts"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add to cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":1,\n    \"product_id\":5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/carts",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"carts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete cart",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/carts/1/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"carts",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "synch cart",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ids\" : [10,5,2,11,4],\n    \"quantities\" : [{{$randomInt}},{{$randomInt}},{{$randomInt}},{{$randomInt}},{{$randomInt}}],\n    \"user_id\" :1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/carts",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"carts"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Set a variable with the random number",
+					"pm.variables.set(\"0to1\", Math.round(Math.random() + 0.3));",
+					"",
+					"pm.variables.set(\"1to5\", Math.floor(Math.random() * 5) + 1);",
+					"",
+					"pm.variables.set(\"1to10\", Math.floor(Math.random() * 10) + 1);",
+					"",
+					"pm.variables.set(\"1to300\", Math.floor(Math.random() * 300) + 1);",
+					"",
+					"pm.variables.set(\"1to3\", Math.floor(Math.random() * 3) + 1);",
+					"",
+					"pm.variables.set(\"4to6\", Math.floor(Math.random() * 3) + 4);",
+					"",
+					"pm.variables.set(\"7to9\", Math.floor(Math.random() * 3) + 7);",
+					"",
+					"pm.variables.set(\"10to12\", Math.floor(Math.random() * 3) + 10);",
+					"",
+					"pm.variables.set(\"13to15\", Math.floor(Math.random() * 3) + 13);",
+					"",
+					"pm.variables.set(\"1to50\", Math.floor(Math.random() * 50) + 1);",
+					"",
+					"pm.variables.set(\"51to100\", Math.floor(Math.random() * 50) + 51);",
+					"",
+					"pm.variables.set(\"101to150\", Math.floor(Math.random() * 50) + 101);",
+					"",
+					"pm.variables.set(\"151to200\", Math.floor(Math.random() * 50) + 151);",
+					"",
+					"pm.variables.set(\"201to250\", Math.floor(Math.random() * 50) + 201);",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:10082",
+			"type": "string"
+		}
+	]
+}

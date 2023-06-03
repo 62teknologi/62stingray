@@ -2,4 +2,5 @@ app.env
 .DS_Store
 main
 *.log
+.idea
 /tmp
