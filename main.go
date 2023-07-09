@@ -29,7 +29,7 @@ func main() {
 
 	apiV1 := r.Group("/api/v1").Use(middlewares.DbSelectorMiddleware())
 	{
-		c := &controllers.CartController{}
+		c := controllers.CartController{}
 
 		apiV1.GET("/:table", c.FindAll)
 		apiV1.POST("/:table", c.Add)

@@ -28,7 +28,7 @@ func (ctrl *CartController) Init(ctx *gin.Context) {
 	ctrl.Table = ctrl.PluralName
 }
 
-func (ctrl *CartController) FindAll(ctx *gin.Context) {
+func (ctrl CartController) FindAll(ctx *gin.Context) {
 	ctrl.Init(ctx)
 
 	values := []map[string]any{}
@@ -58,7 +58,7 @@ func (ctrl *CartController) FindAll(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, utils.ResponseDataPaginate("success", "find "+ctrl.PluralLabel+" success", customResponses, pagination, filter, search, summary))
 }
 
-func (ctrl *CartController) Add(ctx *gin.Context) {
+func (ctrl CartController) Add(ctx *gin.Context) {
 	ctrl.Init(ctx)
 
 	transformer, _ := utils.JsonFileParser(config.Data.SettingPath + "/transformers/request/" + ctrl.Table + "/add.json")
@@ -100,7 +100,7 @@ func (ctrl *CartController) Add(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, utils.ResponseData("success", "create "+ctrl.SingularLabel+" success", transformer))
 }
 
-func (ctrl *CartController) Synch(ctx *gin.Context) {
+func (ctrl CartController) Synch(ctx *gin.Context) {
 	ctrl.Init(ctx)
 
 	transformer, _ := utils.JsonFileParser(config.Data.SettingPath + "/transformers/request/" + ctrl.Table + "/synch.json")
@@ -140,7 +140,7 @@ func (ctrl *CartController) Synch(ctx *gin.Context) {
 }
 
 // todo : need to check constraint error
-func (ctrl *CartController) Delete(ctx *gin.Context) {
+func (ctrl CartController) Delete(ctx *gin.Context) {
 	ctrl.Init(ctx)
 
 	transformer, _ := utils.JsonFileParser(config.Data.SettingPath + "/transformers/request/" + ctrl.Table + "/delete.json")
