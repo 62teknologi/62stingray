@@ -39,7 +39,7 @@ func (ctrl CartController) FindAll(ctx *gin.Context) {
 	search := utils.SetGlobalSearch(query, transformer, ctx)
 
 	utils.SetOrderByQuery(query, ctx)
-	utils.SetBelongsTo(query, transformer, &columns)
+	utils.SetBelongsTo(query, transformer, &columns, ctx)
 	utils.SetOperation(query, transformer, &columns)
 
 	delete(transformer, "filterable")
