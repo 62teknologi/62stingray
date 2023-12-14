@@ -5,3 +5,4 @@ main
 .idea
 /tmp
 .stingray-linux-amd64
+/binary

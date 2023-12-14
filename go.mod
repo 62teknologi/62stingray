@@ -6,6 +6,7 @@ require (
 	github.com/gertd/go-pluralize v0.2.1
 	github.com/gin-gonic/gin v1.9.0
 	github.com/iancoleman/strcase v0.2.0
+	github.com/jackc/pgx/v5 v5.3.1
 	github.com/spf13/viper v1.15.0
 	gorm.io/driver/mysql v1.5.1
 	gorm.io/driver/postgres v1.5.2
@@ -25,7 +26,6 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
-	github.com/jackc/pgx/v5 v5.3.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
